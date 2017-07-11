@@ -156,11 +156,11 @@ if(isset($_POST['create_pdf'])){
 		}
 
 		if($total_recaudado_final - $total_declarado_final > 0){
-			$mensaje = number_format($total_recaudado_final - $total_declarado_final, 0, ',', '.').' Bsf (FALTA)';
+			$mensaje = "FALTAN: ".number_format($total_recaudado_final - $total_declarado_final, 0, ',', '.').' Bsf (FALTA)';
 		}elseif($total_recaudado_final - $total_declarado_final < 0){
-			$mensaje = number_format($total_declarado_final - $total_recaudado_final, 0, ',', '.').' Bsf (SOBRA)';
+			$mensaje = "SOBRAN: ".number_format($total_declarado_final - $total_recaudado_final, 0, ',', '.').' Bsf';
 		}else{
-			$mensaje = number_format($total_declarado_final - $total_recaudado_final, 0, ',', '.').' Bsf (EXACTO)';
+			$mensaje = "¡CUADRE EXACTO!";
 		}
 
 		$total_recaudado_final += (integer)$total_recaudado['SUM(monto)'];
@@ -299,11 +299,11 @@ $pdf->output('Reporte del Dia '.$dia.'.pdf', 'I');
 						}
 
 						if($total_recaudado_final - $total_declarado_final > 0){
-							$mensaje = number_format($total_recaudado_final - $total_declarado_final, 0, ',', '.').' Bsf (FALTA)';
+							$mensaje = "FALTAN: ".number_format($total_recaudado_final - $total_declarado_final, 0, ',', '.').' Bsf';
 						}elseif($total_recaudado_final - $total_declarado_final < 0){
-							$mensaje = number_format($total_declarado_final - $total_recaudado_final, 0, ',', '.').' Bsf (SOBRA)';
+							$mensaje = "SOBRAN: ".number_format($total_declarado_final - $total_recaudado_final, 0, ',', '.').' Bsf';
 						}else{
-							$mensaje = number_format($total_declarado_final - $total_recaudado_final, 0, ',', '.').' Bsf (EXACTO)';
+							$mensaje = '¡CUADRE EXACTO!';
 						}
 
 						$total_recaudado_final += (integer)$total_recaudado['SUM(monto)'];
