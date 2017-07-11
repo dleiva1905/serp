@@ -1,0 +1,76 @@
+
+
+h1 {
+  text-align:center;
+}
+
+input[type="radio"] {
+    display:none;
+    -moz-display:none;
+
+}
+label {
+  width:400px;
+  height: 30px;
+  float:left;
+  text-align:center;
+  background:#ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.4);
+  color:#222222;
+  padding:0.5% !important;
+  margin:0.5% !important;
+  margin-bottom:5px !important;
+  cursor:pointer;
+  font-size: 11px!important;
+  font-weight: bold !important;
+
+
+}
+.extento a{
+  font-size: 11px;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.4);
+}
+@media (max-width:1000px) {
+  label {
+    width:400px;
+    height: 30px;
+    float:left;
+    text-align:center;
+    background:#ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.4);
+    color:#222222;
+    padding:0.5% !important;
+    margin:0.5% !important;
+    margin-bottom:5px !important;
+    cursor:pointer;
+    font-size: 10px!important;
+    font-weight: bold !important;
+
+
+  }
+
+  label:hover{
+    transition: 0.5s;
+    background: #d3d1d1;
+    color: #fff !important;
+  }
+
+  .extento a{
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.4);
+  }
+
+}
+
+label:hover{
+  transition: 0.5s;
+  background: #d3d1d1;
+  color: #fff !important;
+}
+.formulario input[type="radio"]:checked + label {
+      background: #c64949;
+     color: #fff !important;
+
+  }

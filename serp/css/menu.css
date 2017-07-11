@@ -1,0 +1,25 @@
+.sobre a{
+  color:#fff !important;
+  width: 300px;
+  font-weight: bold;
+}
+
+.sobre span{
+  font-size: 25px;
+  margin-left: 10px;
+}
+.navbar-nav{
+  background: #c64949 !important;
+  border-radius: 5px;
+}
+
+.sobre:hover{
+  transition: 0.5s;
+  background: #892626 !important;
+  border-radius: 5px;
+}
+
+.navbar-default{
+  background: none !important;
+  border: none !important;
+}

@@ -1,0 +1,8 @@
+.btn-default:hover{
+	transition:0.5s;
+	background: #c64949 !important;
+	color: #fff !important;
+}
+h4{
+	color: #12202b;
+}
