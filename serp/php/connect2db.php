@@ -1,5 +1,5 @@
 <?php
-
+setlocale(LC_ALL, "es_ES.UTF-8");
 $mysqli = new MySQLi("localhost", "root","{Lov/x}", "serp");
 $acentos = mysqli_query($mysqli,"SET NAMES 'utf8'");
 if ($mysqli -> connect_errno) {
