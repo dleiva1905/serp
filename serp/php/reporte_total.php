@@ -49,7 +49,7 @@ if(isset($_POST['create_pdf'])){
       $font = $this->addTTFfont("../fonts/larabiefont rg.ttf");
       $this->SetFont($font,'',7);
         // Page number
-      $this->info = strftime("%A %d de %B del %Y").' a las '.date('h:i A', strtotime('+30 minutes')).' por '.$_SESSION['nombre'].' '.$_SESSION['apellido'].' C.I: '.$_SESSION['cedula'];
+      $this->info = strftime("%A %d de %B del %Y").' a las '.date('h:i A'/*, strtotime('+30 minutes')*/).' por '.$_SESSION['nombre'].' '.$_SESSION['apellido'].' C.I: '.$_SESSION['cedula'];
       $this->Cell(0, 10, 'Reporte generado el '.$this->info.' (Pagina '.$this->getAliasNumPage().'/'.$this->getAliasNbPages().')', 0, false, 'R', 0, '', 0, false, 'T', 'M');
     }
   }
@@ -151,6 +151,8 @@ if(isset($_POST['create_pdf'])){
     <td height="20" align="center">'.number_format($total_recaudado['SUM(monto)'], 0, ',', '.').' Bsf</td>
   </tr>
 </table>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<span style="text-align:center">______________________________<br><br>'.$_SESSION['nombre'].' '.$_SESSION['apellido'].'<br>C.I: '.$_SESSION['cedula'].'<br>TESORERO</span>
 ';
 
 $pdf->writeHTML($content, true, 0, true, 0);

@@ -73,7 +73,7 @@
 
   #frase{
     font-family: "Palatino";
-    font-size: 20px;
+    font-size: 16px;
   }
 
 </style>
@@ -111,9 +111,6 @@
 
       return false;
     }
-
-    setInterval('frase()', 20000);
-
   </script>
   <center>
     <div class="navbar navbar-default navbar-static-top">

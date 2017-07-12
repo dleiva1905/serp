@@ -32,10 +32,10 @@ if(mysqli_num_rows($verificar_cabina_a_asignar) > 0){
 
 			/* CIERRE DE CAJA */
 
-			$fecha = date('Y/m/d', strtotime('+30 minutes'));
-			$hora = date('H:i:s', strtotime('+30 minutes'));
+			$fecha = date('Y/m/d'/*, strtotime('+30 minutes')*/);
+			$hora = date('H:i:s'/*, strtotime('+30 minutes')*/);
 
-			$registro = mysqli_query($mysqli, "INSERT INTO cierre VALUES ('', '$cedula_usuario_a_editar', '$cabina_actual', '$fecha', '$hora', '$dinero');");
+			$registro = mysqli_query($mysqli, "INSERT INTO cierre VALUES ('', '$cedula_usuario_a_editar', '$cabina_actual', '$fecha', '$hora', '$dinero', 'C');");
 
 			echo '<script>alert("SE GENERÓ EL CIERRE DE CAJA CORRECTAMENTE!")</script>';
 		}

@@ -3,7 +3,7 @@ require("connect2db.php");
 
 $fecha_limite = date('Y/m/d', strtotime('+30 minutes'));
 
-$rowset = mysqli_query($mysqli,"SELECT * FROM cierre WHERE fecha='$fecha_limite' AND (hora BETWEEN (NOW() - INTERVAL 40 MINUTE) AND (NOW()))");
+$rowset = mysqli_query($mysqli,"SELECT * FROM cierre WHERE fecha='$fecha_limite' AND (hora BETWEEN (NOW() - INTERVAL 60 MINUTE) AND (NOW()))");
 ?>
 
 <!DOCTYPE html>

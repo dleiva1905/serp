@@ -5,7 +5,6 @@ $nombre = $_SESSION['nombre'];
 $apellido = $_SESSION['apellido'];
 
 header("Content-Type: text/html;charset=utf-8;");
-date_default_timezone_set('America/Caracas');
 
 require_once('connect2db.php');
 
@@ -49,7 +48,7 @@ if(isset($_POST['create_pdf'])){
 			$font = $this->addTTFfont("../fonts/larabiefont rg.ttf");
 			$this->SetFont($font,'',7);
         // Page number
-			$this->info = strftime("%A %d de %B del %Y").' a las '.date('h:i A', strtotime('+30 minutes')).' por '.$_SESSION['nombre'].' '.$_SESSION['apellido'].' C.I: '.$_SESSION['cedula'];
+			$this->info = strftime("%A %d de %B del %Y").' a las '.date('h:i A'/*, strtotime('+30 minutes')*/).' por '.$_SESSION['nombre'].' '.$_SESSION['apellido'].' C.I: '.$_SESSION['cedula'];
 			$this->Cell(0, 10, 'Reporte generado el '.$this->info.' (Pagina '.$this->getAliasNumPage().'/'.$this->getAliasNbPages().')', 0, false, 'C', 0, '', 0, false, 'T', 'M');
 		}
 	}

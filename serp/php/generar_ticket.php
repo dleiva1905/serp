@@ -25,11 +25,11 @@ while($datos_tabulador=mysqli_fetch_array($query_tabulador)){
 
 $datos_empleado = mysqli_fetch_assoc($query_empleados);
 
-$fecha = date('d/m/Y', strtotime('+30 minutes'));
-$hora = date('H:i A', strtotime('+30 minutes'));
+$fecha = date('d/m/Y'/*, strtotime('+30 minutes')*/);
+$hora = date('H:i A'/*, strtotime('+30 minutes')*/);
 
-$fecha2 = date('Y/m/d', strtotime('+30 minutes'));
-$hora2 = date('H:i:s', strtotime('+30 minutes'));
+$fecha2 = date('Y/m/d'/*, strtotime('+30 minutes')*/);
+$hora2 = date('H:i:s'/*, strtotime('+30 minutes')*/);
 
 $cedula_empleado = $datos_empleado['cedula'];
 $nombre_completo_empleado = $datos_empleado['nombre'].' '.$datos_empleado['apellido'];

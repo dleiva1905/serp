@@ -13,8 +13,8 @@ $query_empleados = mysqli_query($mysqli,"SELECT * FROM empleado WHERE cabina='$c
 
 $datos_empleado = mysqli_fetch_assoc($query_empleados);
 
-$fecha = date('Y/m/d', strtotime('+30 minutes'));
-$hora = date('H:i:s', strtotime('+30 minutes'));
+$fecha = date('Y/m/d'/*, strtotime('+30 minutes')*/);
+$hora = date('H:i:s'/*, strtotime('+30 minutes')*/);
 
 $nombre_completo_empleado = $datos_empleado['nombre'].$datos_empleado['apellido'];
 $cedula_empleado = $datos_empleado['cedula'];

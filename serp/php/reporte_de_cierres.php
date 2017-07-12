@@ -49,7 +49,7 @@ if(isset($_POST['create_pdf'])){
 			$font = $this->addTTFfont("../fonts/larabiefont rg.ttf");
 			$this->SetFont($font,'',7);
         // Page number
-			$this->info = strftime("%A %d de %B del %Y").' a las '.date('h:i A', strtotime('+30 minutes')).' por '.$_SESSION['nombre'].' '.$_SESSION['apellido'].' C.I: '.$_SESSION['cedula'];
+			$this->info = strftime("%A %d de %B del %Y").' a las '.date('h:i A'/*, strtotime('+30 minutes')*/).' por '.$_SESSION['nombre'].' '.$_SESSION['apellido'].' C.I: '.$_SESSION['cedula'];
 			$this->Cell(0, 10, 'Reporte generado el '.$this->info.' (Pagina '.$this->getAliasNumPage().'/'.$this->getAliasNbPages().')', 0, false, 'C', 0, '', 0, false, 'T', 'M');
 		}
 	}
@@ -103,13 +103,24 @@ if(isset($_POST['create_pdf'])){
 				<th colspan="8" style="text-align:center;"><h3>REPORTE FILTRADO DEL OPERADOR: <u><em>'.$recaudador['nombre'].' '.$recaudador['apellido'].' - C.I: '.number_format($operador, 0, ',', '.').'</em></u></h3><br></th>
 			</tr>';
 		}
+
+		$total_declarado = 0;
+		while ($cierre= mysqli_fetch_assoc($cierres)) {
+			$monto = mysqli_fetch_assoc(mysqli_query($mysqli, "SELECT monto_declarado FROM decantacion WHERE cierre='".$cierre['id_cierre']."'"));
+
+			$total_declarado += $monto['monto_declarado'];
+		}
+
+		$cierres = mysqli_query($mysqli, "SELECT * FROM cierre WHERE fecha>='$desde' AND fecha<='$hasta'".$filtro_operador."");
+
 		$content .= '
 		<tr>
-			<td align="left" style="font-weight: bold" colspan="2">CANTIDAD DE CIERRES</td>
+			<td align="left" style="font-weight: bold" colspan="1">CANTIDAD DE CIERRES</td>
 			<td align="center" style="font-weight: bold">'.number_format($cantidad_de_cierres, 0, ',', '.').' Cierre(s)</td>
-			<td></td>
-			<td align="left" style="font-weight: bold" colspan="2">     TOTAL RECAUDADO</td>
+			<td align="left" style="font-weight: bold" colspan="2">     TOTAL RECAUDADO (SISTEMA)</td>
 			<td style="font-weight: bold">'.number_format($total_recaudado['SUM(monto_recaudado)'], 0, ',', '.').' Bsf</td>
+			<td align="left" style="font-weight: bold" colspan="2">TOTAL DECLARADO (FÍSICO)</td>
+			<td style="font-weight: bold">'.number_format($total_declarado, 0, ',', '.').' Bsf'.'</td>
 		</tr>
 		<br>
 		<tr style="background-color: #f2f3f4;">
@@ -139,15 +150,21 @@ if(isset($_POST['create_pdf'])){
 				$mensaje = "¡CUADRE EXACTO!";
 			}
 
+			if($decantacion['monto_declarado'] > 0){
+				$result = (string)number_format($decantacion['monto_declarado'], 0, ',', '.').' Bsf';
+			}
+			else{
+				$result="SIN DECLARAR";
+			}
+
 			$reca = mysqli_fetch_assoc(mysqli_query($mysqli, "SELECT nombre, apellido FROM empleado WHERE cedula='".$cierre['recaudador']."'"));
 			$content .= '
 			<td align="left">'.str_pad((int) $cierre['id_cierre'],6,"0",STR_PAD_LEFT).'</td>
 			<td align="left">'.$reca['nombre'].' '.$reca['apellido'].'</td>
 			<td align="center">'.$cierre['cabina'].'</td>
 			<td align="center">'.date("d-m-Y", strtotime($cierre['fecha'])).' '.date("h:i A", strtotime($cierre['hora'])).'</td>
-
 			<td align="center">'.number_format($cierre['monto_recaudado'], 0, ',', '.').' Bsf</td>
-			<td align="center">'.number_format($decantacion['monto_declarado'], 0, ',', '.').' Bsf</td>
+			<td align="center">'.$result.'</td>
 			<td align="center">'.$mensaje.'</td>
 		</tr>';
 
@@ -218,7 +235,7 @@ if($operador != '' && $operador != ' '){
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>ID CIERRE</th>
+							<th width="110" align="center"><center>CIERRE</center></th>
 							<th><center>RECAUDADOR</center></th>
 							<th><center>CABINA</center></th>
 							<th><center>FECHA</center></th>
@@ -226,6 +243,7 @@ if($operador != '' && $operador != ' '){
 							<th><center>MONTO</center></th>
 							<th><center>MONTO DECLARADO</center></th>
 							<th><center>DIFERENCIA</center></th>
+							<th width="150"><center>TIPO DE CIERRE</center></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -241,14 +259,14 @@ if($operador != '' && $operador != ' '){
 							$recaudador_actual = mysqli_fetch_assoc(mysqli_query($mysqli, "SELECT nombre, apellido FROM empleado WHERE cedula='".$cierre['recaudador']."'"));
 							?>
 							<tr>
-								<td><?php echo str_pad((int) $cierre['id_cierre'],7,"0",STR_PAD_LEFT); ?></td>
+								<td align="center"><?php echo str_pad((int) $cierre['id_cierre'],7,"0",STR_PAD_LEFT); ?></td>
 								<td><center><?php echo $recaudador_actual['nombre'].' '.$recaudador_actual['apellido']; ?></center></td>
 								<td><center><?php echo $cierre['cabina']; ?></center></td>
-								<td><center><?php echo $cierre['fecha']; ?> </center></td>
-								<td><center><?php echo $cierre['hora']; ?> </center></td>
-								<td><center><?php echo number_format($cierre['monto_recaudado'], 0, ',', '.'); ?> Bsf</center></td>
-								<td><center><?php echo number_format($declaracion['monto_declarado'], 0, ',', '.'); ?> Bsf</center></td>
-								<td><center><?php 
+								<td width="110"><center><?php echo $cierre['fecha']; ?> </center></td>
+								<td width="100"><center><?php echo date("h:i A", strtotime($cierre['hora'])); ?> </center></td>
+								<td width="15<0"><center><?php echo number_format($cierre['monto_recaudado'], 0, ',', '.'); ?> Bsf</center></td>
+								<td width="100"><center><?php if($declaracion['monto_declarado'] > 0){echo number_format($declaracion['monto_declarado'], 0, ',', '.').' Bsf';} else{echo "SIN DECLARAR";}?></center></td>
+								<td width="200"><center><?php 
 									if($cierre['monto_recaudado'] - $declaracion['monto_declarado'] > 0){
 										echo "FALTAN: ".number_format($cierre['monto_recaudado'] - $declaracion['monto_declarado'], 0, ',', '.')." Bsf";
 									}elseif($cierre['monto_recaudado'] - $declaracion['monto_declarado'] < 0){
@@ -258,6 +276,10 @@ if($operador != '' && $operador != ' '){
 									}
 									?></center>
 								</td>
+								<td align="center"><?php 
+									if($cierre['tipo_de_cierre'] == 'D'){echo "DESCONEXIÓN";}
+									elseif($cierre['tipo_de_cierre'] == 'G'){echo "GENERADO";}
+									else{echo "TESORERO";}?></td>
 							</tr>
 							<?php } ?>
 						</tbody>

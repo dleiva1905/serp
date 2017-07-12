@@ -16,8 +16,8 @@ if($f = mysqli_fetch_assoc($query)){
 		$_SESSION['apellido'] = $f['apellido'];
 		$_SESSION['cargo'] = $f['cargo'];
 
-		$hora_de_conexion = date('H:i:s', strtotime('+30 minutes'));
-		$fecha_de_conexion = date('Y/m/d', strtotime('+30 minutes'));
+		$hora_de_conexion = date('H:i:s'/*, strtotime('+30 minutes')*/);
+		$fecha_de_conexion = date('Y/m/d'/*, strtotime('+30 minutes')*/);
 
 		$registrar_log = mysqli_query($mysqli, "INSERT INTO log_login VALUES ('', '".$f['cedula']."', '7', '".$hora_de_conexion."', '', '".$fecha_de_conexion."', '')");
 
@@ -40,8 +40,8 @@ if($f2=mysqli_fetch_assoc($query)){
 
 		echo '<script>alert("Bienvenido/a \"'.$f2['nombre'].' '.$f2['apellido'].'\" al S.E.R.P.\n\nRecuerda regalar a las personas un caluroso ¡FELIZ VIAJE!")</script>';
 
-		$hora_de_conexion = date('H:i:s', strtotime('+30 minutes'));
-		$fecha_de_conexion = date('Y/m/d', strtotime('+30 minutes'));
+		$hora_de_conexion = date('H:i:s'/*, strtotime('+30 minutes')*/);
+		$fecha_de_conexion = date('Y/m/d'/*, strtotime('+30 minutes')*/);
 
 		$registrar_log = mysqli_query($mysqli, "INSERT INTO log_login VALUES ('', '".$f2['cedula']."', '".$f2['cabina']."', '".$hora_de_conexion."', '', '".$fecha_de_conexion."', '')");
 
