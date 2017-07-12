@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2017 at 09:52 pm
+-- Generation Time: Jul 12, 2017 at 01:21 am
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -76,7 +76,8 @@ CREATE TABLE `cierre` (
   `cabina` int(1) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `monto_recaudado` float NOT NULL
+  `monto_recaudado` float NOT NULL,
+  `tipo_de_cierre` char(1) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
