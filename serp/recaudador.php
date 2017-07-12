@@ -25,12 +25,7 @@ if (@!$_SESSION['usuario']) {
   <link rel="stylesheet" type="text/css" href="css/sty.css">
 
   <style type="text/css">
-    body,a, #vehiculos{
-      font-family: "Palatino";
-      font-size: 20px;
-    }
-
-    #vehiculos{
+    body,a{
       font-family: "Palatino";
       font-size: 20px;
     }
